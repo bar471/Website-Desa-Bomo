@@ -68,3 +68,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
