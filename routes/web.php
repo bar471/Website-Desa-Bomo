@@ -17,6 +17,8 @@ Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 
+
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -38,3 +40,7 @@ Route::resource('admin/organisasi', OrganisasiController::class);
 // 📌 Pengaduan
 Route::resource('admin/pengaduan', PengaduanController::class)->only(['index', 'edit', 'update']);
 require __DIR__.'/auth.php';
+
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
