@@ -1,5 +1,4 @@
 <x-guest-layout>
-    {{-- Container utama untuk mengatur tata letak --}}
     <div class="onboarding-container">
         
         <button class="close-button" aria-label="Tutup Halaman" onclick="window.location.href='/'">
@@ -13,7 +12,6 @@
             <h1 class="title">Selamat Datang</h1>
             
             <div class="illustration-wrapper">
-                {{-- Gunakan fungsi asset() Laravel untuk memuat gambar --}}
                 <img src="{{ asset('assets/onboarding/oldman 1.png') }}" alt="Ilustrasi seorang kakek melambai" class="illustration-img">
             </div>
 
@@ -23,7 +21,6 @@
         </div>
 
         <div class="button-area">
-            {{-- Ganti '#panduan-url' dengan rute ke halaman panduan Anda --}}
             <a href="#panduan-url" class="onboarding-button">Lanjutkan Ke Panduan</a>
         </div>
     </div>
