@@ -9,6 +9,8 @@ use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\BantuanController;
+use App\Http\Controllers\PanduanController;
+
 
 // =============================
 // User Page Routes
@@ -69,7 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // 📌 Bantuan
-
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
