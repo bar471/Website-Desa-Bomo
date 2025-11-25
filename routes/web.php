@@ -72,4 +72,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // 📌 Bantuan
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
 
