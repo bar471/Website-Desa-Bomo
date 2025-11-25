@@ -72,3 +72,5 @@ require __DIR__.'/auth.php';
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
+// 📌 Bantuan
+
