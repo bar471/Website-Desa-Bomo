@@ -97,6 +97,22 @@ Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])->name(
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
+
+//potensi_RouteBaru
+// Wisata
+Route::get('/wisata', function () {
+    return view('user.wisata');
+})->name('wisata');
+
+// Perikanan
+Route::get('/perikanan', function () {
+    return view('user.perikanan');
+})->name('perikanan');
+
+// Pertanian
+Route::get('/pertanian', function () {
+    return view('user.pertanian');
+})->name('pertanian');
 // 📌 Bantuan
 // Akhiri chat
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
