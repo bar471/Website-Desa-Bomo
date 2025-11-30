@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class BantuanMessage extends Model
 {
-    //
+    protected $fillable = ['sender', 'message'];
 }
