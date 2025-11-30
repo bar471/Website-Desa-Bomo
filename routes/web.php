@@ -28,6 +28,7 @@ Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pe
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 Route::get('/bantuan', [BantuanController::class, 'index'])->name('user.bantuan');
 
+
 // 👉 Halaman Panduan di sisi User
 Route::get('/panduan', [PanduanController::class, 'showUserView'])->name('panduan.user');
 Route::get('/panduan/{id}', [PanduanController::class, 'show'])->name('user.panduan.show');
@@ -83,14 +84,30 @@ Route::get('/infografis', function () {
 // Bantuan - Chat dan Rating
 // =============================
 
-// Start chat
-Route::post('/bantuan/start', [BantuanChatController::class, 'start'])->name('bantuan.start');
+// =============================
+// Bantuan - Chat dan Rating
+// =============================
 
-// Kirim pesan chat
-Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])->name('bantuan.chat.send');
+// 👉 Menampilkan halaman Bantuan (pilih kategori)
+Route::get('/bantuan', [BantuanController::class, 'index'])
+    ->name('user.bantuan');
 
-// Akhiri chat
-Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
+// 👉 User menekan tombol "Mulai Chat" setelah memilih kategori
+Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
+    ->name('bantuan.start');
 
-// Simpan rating
-Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])->name('bantuan.rating');
+// 👉 Halaman tampilan chat utama (chat view) — dipanggil setelah start()
+Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
+    ->name('bantuan.chat.view');
+
+// 👉 Mengirim pesan melalui AJAX
+Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
+    ->name('bantuan.chat.send');
+
+// 👉 Mengakhiri sesi chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
+    ->name('bantuan.chat.end');
+
+// 👉 Menyimpan rating setelah chat selesai
+Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
+    ->name('bantuan.rating');
