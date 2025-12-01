@@ -16,7 +16,7 @@ class BantuanChatController extends Controller
 
         session(['bantuan_kategori' => $request->kategori]);
 
-        return response()->json(['status' => 'started']);
+        return redirect()->route('bantuan.chat.view');
     }
 
     public function send(Request $request)
@@ -33,6 +33,17 @@ class BantuanChatController extends Controller
 
         // admin akan membalas lewat dashboard
         return response()->json(['status' => 'sent']);
+    }
+
+    public function chatView()
+    {
+        $kategori = session('bantuan_kategori');
+
+        if (!$kategori) {
+            return redirect()->route('user.bantuan')->with('error', 'Pilih kategori dahulu!');
+        }
+
+        return view('user.bantuan-chat', compact('kategori'));
     }
 
     public function end()
