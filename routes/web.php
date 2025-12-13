@@ -12,18 +12,19 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\BantuanChatController;
 use App\Http\Controllers\BantuanRatingController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OnboardingController; // <-- TAMBAHKAN INI
-
+use App\Http\Controllers\CommentController;
 
 // =============================
 // User Page Routes
 // =============================
 Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+    return view('onboarding.welcome');
+})->name('welcome');
 
 // Rute Onboarding
-Route::get('/welcome', [OnboardingController::class, 'show'])->name('onboarding.show');
+Route::get('/home', [HomeController::class, 'userview'])->name('home');
 Route::get('/tutorial', [OnboardingController::class, 'showTutorial'])->name('onboarding.tutorial');
 Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name('onboarding.completion');
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
@@ -135,3 +136,10 @@ Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('b
 // 👉 Menyimpan rating setelah chat selesai
 Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
     ->name('bantuan.rating');
+
+// Ambil komentar
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
+
+// Simpan komentar
+Route::post('/panduan/comment', [CommentController::class, 'store'])
+    ->name('comments.store');

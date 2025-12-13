@@ -72,7 +72,7 @@
                 
                 {{-- TOMBOL: PANDUAN VIDEO CEPAT (Menuju Video) --}}
                 <a 
-                    href="#video-panduan-url" 
+                    href="/panduan" 
                     class="relative py-4 px-8 bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 text-white text-base font-bold text-center rounded-2xl 
                             transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-green-700 hover:via-emerald-700 hover:to-green-700
                             active:scale-95 transform hover:scale-105 w-full group overflow-hidden">
