@@ -12,6 +12,7 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\BantuanChatController;
 use App\Http\Controllers\BantuanRatingController;
+use App\Http\Controllers\AdminBantuanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OnboardingController; // <-- TAMBAHKAN INI
 use App\Http\Controllers\CommentController;
@@ -86,9 +87,6 @@ Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
 
-// =============================
-// Bantuan - Chat dan Rating
-// =============================
 
 // =============================
 // Bantuan - Chat dan Rating
@@ -137,6 +135,28 @@ Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('b
 Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
     ->name('bantuan.rating');
 
+
+// =============================
+// ADMIN - Layanan Bantuan Chat
+// =============================
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        // 📌 Halaman daftar percakapan bantuan (group by session_id)
+        Route::get('/bantuan', [AdminBantuanController::class, 'index'])
+            ->name('bantuan.index');
+
+        // 📌 Detail chat berdasarkan session_id
+        Route::get('/bantuan/chat/{session_id}', [AdminBantuanController::class, 'showChat'])
+            ->name('bantuan.chat');
+
+        // 📌 Admin membalas pesan
+        Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
+            ->name('bantuan.reply');
+    });
 // Ambil komentar
 Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
 
