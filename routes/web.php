@@ -13,14 +13,21 @@ use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\BantuanChatController;
 use App\Http\Controllers\BantuanRatingController;
 use App\Http\Controllers\AdminBantuanController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OnboardingController; // <-- TAMBAHKAN INI
+use App\Http\Controllers\CommentController;
 
 // =============================
 // User Page Routes
 // =============================
 Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+    return view('onboarding.welcome');
+})->name('welcome');
 
+// Rute Onboarding
+Route::get('/home', [HomeController::class, 'userview'])->name('home');
+Route::get('/tutorial', [OnboardingController::class, 'showTutorial'])->name('onboarding.tutorial');
+Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name('onboarding.completion');
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
 Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView'])->name('informasi');
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
@@ -93,6 +100,28 @@ Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
 // 👉 Mengakhiri sesi chat
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
     ->name('bantuan.chat.end');
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+
+//potensi_RouteBaru
+// Wisata
+Route::get('/wisata', function () {
+    return view('user.wisata');
+})->name('wisata');
+
+// Perikanan
+Route::get('/perikanan', function () {
+    return view('user.perikanan');
+})->name('perikanan');
+
+// Pertanian
+Route::get('/pertanian', function () {
+    return view('user.pertanian');
+})->name('pertanian');
+// 📌 Bantuan
+// Akhiri chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
 
 // 👉 Menyimpan rating setelah chat selesai
 Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
@@ -143,3 +172,9 @@ require __DIR__ . '/auth.php';
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
+// Ambil komentar
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
+
+// Simpan komentar
+Route::post('/panduan/comment', [CommentController::class, 'store'])
+    ->name('comments.store');
