@@ -178,24 +178,33 @@ class="bg-white text-green-700 font-semibold p-4 rounded-xl text-center shadow-m
 </section>
 
 <!-- Struktur Organisasi -->
-<section class="container mx-auto px-6 py-16 bg-white text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 mb-10">Struktur Organisasi</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="100">
-            <h3 class="font-semibold text-gray-800">Kepala Desa</h3>
-            <p class="text-gray-600">Bapak Ahmad Syaifullah</p>
+<section class="py-24 bg-white relative overflow-hidden" data-aos="fade-up">
+    <div class="container mx-auto px-6 text-center relative z-10">
+        
+        <h2 class="text-4xl font-bold text-green-700 mb-4 uppercase">Struktur Organisasi</h2>
+        <div class="w-20 h-1.5 bg-green-500 mx-auto rounded-full mb-10"></div>
+
+        <p class="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed italic">
+            "Tata kelola pemerintahan Desa Bomo dijalankan oleh perangkat desa yang berdedikasi tinggi, transparan, dan akuntabel dalam setiap fungsi pelayanan publik."
+        </p>
+
+        <div class="flex flex-col items-center space-y-12 mb-16">
+            @foreach($organisasi->where('jabatan', 'Kepala Desa')->take(1) as $kades)
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    @include('user.infografis._card_organisasi', ['anggota' => $kades, 'size' => 'medium'])
+                </div>
+            @endforeach
         </div>
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="200">
-            <h3 class="font-semibold text-gray-800">Sekretaris Desa</h3>
-            <p class="text-gray-600">Ibu Rina Wati</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="300">
-            <h3 class="font-semibold text-gray-800">Bendahara</h3>
-            <p class="text-gray-600">Bapak Mulyadi</p>
-        </div>
+
+        <a href="{{ route('organisasi') }}" 
+           class="inline-flex items-center px-10 py-4 border-2 border-green-600 text-green-700 font-bold rounded-2xl hover:bg-green-600 hover:text-white transition-all duration-300 group">
+            <span>Lihat Struktur Selengkapnya</span>
+            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </a>
     </div>
 </section>
-
 
 
 
