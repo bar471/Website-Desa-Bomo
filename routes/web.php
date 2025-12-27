@@ -66,41 +66,47 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
 
 // =============================
-// Bantuan - Chat dan Rating
+// USER - BANTUAN - CHAT
 // =============================
 
-// 👉 Menampilkan halaman Bantuan (pilih kategori)
+// 👉 Halaman Bantuan (pilih kategori)
 Route::get('/bantuan', [BantuanController::class, 'index'])
     ->name('user.bantuan');
 
-// 👉 User menekan tombol "Mulai Chat" setelah memilih kategori
+// 👉 Mulai chat (buat session)
 Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
     ->name('bantuan.start');
 
-// 👉 Halaman tampilan chat utama (chat view) — dipanggil setelah start()
+// 👉 Halaman chat
 Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
     ->name('bantuan.chat.view');
 
-// 👉 Mengirim pesan melalui AJAX
+// 👉 Kirim pesan (AJAX)
 Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
     ->name('bantuan.chat.send');
 
-// ambil semua chat berdasarkan session_id (AJAX polling)
+// 👉 Ambil pesan (AJAX polling)
 Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
     ->name('bantuan.chat.fetch');
 
-
-// 👉 Mengakhiri sesi chat
+// NOTE: setelah ini redirect ke halaman rating
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
     ->name('bantuan.chat.end');
 
-// 👉 Menyimpan rating setelah chat selesai
-Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
-    ->name('bantuan.rating');
+/*
+|--------------------------------------------------------------------------
+| BANTUAN - RATING (USER)
+|--------------------------------------------------------------------------
+*/
+// 👉 Tampilkan halaman rating (SETELAH chat selesai)
+Route::get('/bantuan/rating/{session_id}', 
+    [BantuanRatingController::class, 'create']
+)->name('bantuan.rating.create');
 
-
-Route::get('/bantuan/chat/messages', [BantuanChatController::class, 'messages'])
-    ->name('bantuan.chat.messages');
+// simpan rating
+Route::post('/bantuan/rating/store', 
+    [BantuanRatingController::class, 'store']
+)->name('bantuan.rating.store');
 
 
 // =============================
@@ -124,8 +130,6 @@ Route::middleware('auth')
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
             ->name('bantuan.reply');
     });
-
-
 
     
 // =============================
