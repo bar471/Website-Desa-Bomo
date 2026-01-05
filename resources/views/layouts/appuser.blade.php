@@ -16,8 +16,11 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
+
 <body 
-    class="bg-gray-100 text-green-900 font-sans leading-relaxed min-h-screen flex flex-col"
+
+     class="bg-gray-100 text-green-900 font-sans leading-relaxed 
+           min-h-screen flex flex-col pt-20"
     x-data="{ 
         akses:false, 
         invert: JSON.parse(localStorage.getItem('invert')) || false,
@@ -52,10 +55,9 @@
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
     </script>
-
+<x-accessibility />
 </body>
 
 {{-- 🔥 Pindahkan aksesibilitas ke luar body --}}
-<x-accessibility />
 
 </html>

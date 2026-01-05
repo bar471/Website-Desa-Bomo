@@ -85,4 +85,6 @@ class OrganisasiController extends Controller
         $organisasi->delete();
         return redirect()->route('admin.organisasi.index')->with('success', 'Data dihapus!');
     }
+
+   
 }
